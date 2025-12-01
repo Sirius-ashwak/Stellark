@@ -1,250 +1,161 @@
-# Stellark - IP Rights Management on Story Protocol
+<p align="center">
+  <h1 align="center">Stellark</h1>
+  <p align="center">Programmable IP Rights Infrastructure on Story Protocol</p>
+</p>
 
-Stellark is a full-stack application for managing intellectual property rights on the Story Protocol blockchain. It allows users to parse license text, register IP assets, and classify usage against rights schemas.
+<p align="center">
+  <a href="https://github.com/Sirius-ashwak/Stellark/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"></a>
+  <a href="https://docs.story.foundation"><img src="https://img.shields.io/badge/Story-Protocol-purple.svg" alt="Story Protocol"></a>
+  <a href="https://nodejs.org"><img src="https://img.shields.io/badge/node-20%2B-green.svg" alt="Node"></a>
+</p>
 
-## 🚀 Features
+---
 
-- **License Parser**: Parse any license text (CC-BY, MIT, etc.) into a structured Stellark Rights Schema using AI
-- **IP Registration**: Register IP assets on Story Protocol with metadata stored on IPFS
-- **Usage Classification**: Check if specific usage contexts comply with rights schemas
-- **Wallet Integration**: Connect with MetaMask or other Web3 wallets via wagmi
+Stellark transforms natural language license terms into structured, on-chain IP rights. Parse any license (CC-BY, MIT, custom terms), register assets on Story Protocol, and programmatically verify usage compliance.
 
-## 📋 Prerequisites
+## Why Stellark
 
-- Node.js 20+
-- npm or yarn
-- MetaMask or Web3 wallet
-- Story Protocol testnet tokens (from faucet)
+Current IP management is fragmented. License terms exist in PDFs, legal documents, and scattered metadata. Stellark creates a unified schema that machines can read, blockchains can enforce, and creators can trust.
 
-## 🛠️ Tech Stack
+**Parse** - Convert license text into structured rights using LLM  
+**Register** - Mint IP assets on Story Protocol with IPFS metadata  
+**Classify** - Check usage contexts against rights schemas in real-time
 
-### Backend
-- **Runtime**: Node.js 20+ with TypeScript
-- **Framework**: Express.js
-- **Database**: SQLite with Prisma ORM
-- **Blockchain**: Story Protocol SDK (@story-protocol/core-sdk)
-- **IPFS**: Pinata Web3 SDK
-- **AI**: Groq (Llama 3.1-8B)
-
-### Frontend
-- **Framework**: Next.js 14 with App Router
-- **Styling**: Tailwind CSS
-- **Web3**: wagmi + viem
-- **State**: TanStack Query
-
-## 📁 Project Structure
-
-```
-stellark/
-├── backend/
-│   ├── src/
-│   │   ├── index.ts              # Express server entry
-│   │   ├── routes/               # API route handlers
-│   │   │   ├── parseLicense.ts
-│   │   │   ├── registerIP.ts
-│   │   │   ├── verifyOriginality.ts
-│   │   │   └── classifyUsage.ts
-│   │   ├── services/             # Business logic
-│   │   │   ├── storyService.ts   # Story Protocol integration
-│   │   │   ├── groqService.ts    # LLM parsing
-│   │   │   ├── yakoaService.ts   # Originality check (MOCK)
-│   │   │   └── classificationService.ts
-│   │   ├── types/                # TypeScript types
-│   │   └── utils/                # Utilities
-│   ├── prisma/
-│   │   └── schema.prisma         # Database schema
-│   └── package.json
-├── frontend/
-│   ├── app/
-│   │   ├── layout.tsx
-│   │   ├── page.tsx
-│   │   ├── providers.tsx         # wagmi/React Query providers
-│   │   ├── globals.css
-│   │   └── api/                  # API route proxies
-│   ├── components/
-│   │   ├── WalletConnect.tsx
-│   │   ├── LicenseParser.tsx
-│   │   ├── RegisterIP.tsx
-│   │   └── UsageClassifier.tsx
-│   └── package.json
-└── README.md
-```
-
-## 🚀 Getting Started
-
-### 1. Clone and Install
+## Quick Start
 
 ```bash
-# Install backend dependencies
+# Clone
+git clone https://github.com/Sirius-ashwak/Stellark.git
+cd Stellark
+
+# Backend
 cd backend
 npm install
+cp .env.example .env  # Configure your keys
+npx prisma generate && npx prisma db push
+npm run dev
 
-# Install frontend dependencies
-cd ../frontend
+# Frontend (new terminal)
+cd frontend
 npm install
+npm run dev
 ```
 
-### 2. Configure Environment
+Open [localhost:3000](http://localhost:3000)
 
-Backend (`.env`):
-```env
-# Story Protocol
-WALLET_PRIVATE_KEY=your_private_key_without_0x_prefix
+## Configuration
+
+### Backend `.env`
+
+```
+WALLET_PRIVATE_KEY=your_private_key_without_0x
 RPC_PROVIDER_URL=https://aeneid.storyrpc.io
-
-# Pinata IPFS
-PINATA_JWT=your_pinata_jwt_token
-
-# Groq LLM
-GROQ_API_KEY=your_groq_api_key
-
-# Database
+PINATA_JWT=your_pinata_jwt
+GROQ_API_KEY=your_groq_key
 DATABASE_URL=file:./dev.db
-
-# Server
 PORT=3001
 ```
 
-Frontend (`.env.local`):
-```env
+### Frontend `.env.local`
+
+```
 BACKEND_URL=http://localhost:3001
 ```
 
-### 3. Setup Database
+Get testnet tokens from the [Story Aeneid Faucet](https://docs.story.foundation/network/network-info/aeneid#faucet).
 
-```bash
-cd backend
-npx prisma generate
-npx prisma db push
+## API
+
+### Parse License
+
+```
+POST /api/parse-license
 ```
 
-### 4. Get Testnet Tokens
-
-1. Visit the Story Aeneid faucet: https://docs.story.foundation/network/network-info/aeneid#faucet
-2. Request testnet IP tokens for your wallet
-
-### 5. Run Development Servers
-
-```bash
-# Terminal 1 - Backend
-cd backend
-npm run dev
-
-# Terminal 2 - Frontend
-cd frontend
-npm run dev
-```
-
-Visit http://localhost:3000 to use the application.
-
-## 📚 API Endpoints
-
-### POST /api/parse-license
-Parse license text into Stellark Rights Schema.
-
-**Request:**
 ```json
 {
-  "licenseText": "CC-BY 4.0 Attribution required..."
+  "licenseText": "Creative Commons Attribution 4.0..."
 }
 ```
 
-**Response:**
+Returns structured `RightsSchema` with confidence score.
+
+### Register IP
+
+```
+POST /api/register-ip
+```
+
 ```json
 {
-  "schema": {
-    "allowDerivatives": true,
-    "allowCommercialUse": true,
-    "attributionRequired": true,
-    "shareAlike": false,
-    "royaltyRateBps": 0,
-    "territory": ["worldwide"],
-    "prohibitedUses": [],
-    "allowedPlatforms": []
-  },
-  "confidence": 0.95
+  "nftMetadata": { "name": "...", "description": "...", "image": "..." },
+  "ipMetadata": { "title": "...", "description": "...", "image": "..." },
+  "rightsSchema": { ... }
 }
 ```
 
-### POST /api/register-ip
-Register an IP asset on Story Protocol.
+Returns `txHash`, `ipId`, and explorer URL.
 
-**Request:**
+### Classify Usage
+
+```
+POST /api/classify-usage
+```
+
 ```json
 {
-  "nftMetadata": {
-    "name": "My IP Asset",
-    "description": "Description",
-    "image": "https://ipfs.io/ipfs/..."
-  },
-  "ipMetadata": {
-    "title": "My IP",
-    "description": "Description",
-    "image": "https://ipfs.io/ipfs/..."
-  },
-  "rightsSchema": {...}
+  "rightsSchema": { ... },
+  "usageContext": { "domain": "example.com", "useType": "commercial" }
 }
 ```
 
-**Response:**
-```json
-{
-  "txHash": "0x...",
-  "ipId": "0x...",
-  "explorerUrl": "https://aeneid.explorer.story.foundation/ipa/0x..."
-}
-```
+Returns classification, reasoning, and recommendations.
 
-### POST /api/classify-usage
-Classify usage against a rights schema.
-
-**Request:**
-```json
-{
-  "rightsSchema": {...},
-  "usageContext": {
-    "domain": "shopify.com",
-    "useType": "commercial"
-  }
-}
-```
-
-**Response:**
-```json
-{
-  "classification": "Likely Violation",
-  "reason": "Commercial use not allowed",
-  "recommendations": [...]
-}
-```
-
-## 📖 Stellark Rights Schema
+## Rights Schema
 
 ```typescript
 interface RightsSchema {
-  allowDerivatives: boolean;      // Can create derivative works
-  allowCommercialUse: boolean;    // Can use commercially
-  attributionRequired: boolean;   // Must give credit
-  shareAlike: boolean;            // Derivatives must use same license
-  royaltyRateBps: number;         // Royalty rate in basis points (100 = 1%)
-  territory: string[];            // Geographic restrictions
-  prohibitedUses: string[];       // Explicitly forbidden uses
-  allowedPlatforms: string[];     // Platform restrictions (optional)
+  allowDerivatives: boolean
+  allowCommercialUse: boolean
+  attributionRequired: boolean
+  shareAlike: boolean
+  royaltyRateBps: number
+  territory: string[]
+  prohibitedUses: string[]
+  allowedPlatforms: string[]
 }
 ```
 
-## 🔗 Resources
+## Stack
 
-- [Story Protocol Docs](https://docs.story.foundation)
+| Layer | Technology |
+|-------|------------|
+| Blockchain | Story Protocol SDK, Aeneid Testnet |
+| Storage | IPFS via Pinata |
+| AI | Groq (Llama 3.1-8B) |
+| Backend | Node.js, Express, Prisma, SQLite |
+| Frontend | Next.js 14, Tailwind CSS, wagmi |
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## Resources
+
+- [Story Protocol Documentation](https://docs.story.foundation)
 - [Story SDK Reference](https://docs.story.foundation/sdk-reference/ipasset)
-- [Aeneid Testnet Explorer](https://aeneid.explorer.story.foundation)
-- [Pinata IPFS](https://pinata.cloud)
-- [Groq AI](https://groq.com)
+- [Aeneid Explorer](https://aeneid.explorer.story.foundation)
 
-## 📜 License
+## License
 
-MIT License
+MIT License. See [LICENSE](LICENSE) for details.
 
-## ⚠️ Disclaimer
+---
 
-This is an MVP for educational/demonstration purposes. The Yakoa API integration is mocked for development. Always verify rights and compliance in production scenarios.
+<p align="center">
+  Built for the programmable IP economy
+</p>
