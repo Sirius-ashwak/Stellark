@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background: #0d0d0d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: var(--background);
+  min-height: 100vh;
+  font-feature-settings: "rlig" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection */
+::selection {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+/* Scrollbar - Minimal like Dovetail */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@layer components {
+  /* Primary Button - White on dark like Dovetail */
+  .btn-primary {
+    @apply px-5 py-2.5 bg-white text-black text-sm font-medium rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-[#0d0d0d] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Secondary Button - Outlined */
+  .btn-secondary {
+    @apply px-5 py-2.5 bg-transparent border border-white/20 text-white text-sm font-medium rounded-full hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-[#0d0d0d] transition-all duration-200;
+  }
+
+  /* Ghost Button */
+  .btn-ghost {
+    @apply px-4 py-2 text-gray-400 text-sm font-medium rounded-lg hover:text-white hover:bg-white/5 focus:outline-none transition-all duration-200;
+  }
+
+  /* Card - Dovetail Style */
+  .card {
+    @apply bg-[#141414] rounded-xl border border-white/5 p-6 hover:border-white/10 transition-colors;
+  }
+
+  /* Input - Dovetail Style */
+  .input {
+    @apply w-full px-4 py-3 bg-[#1a1a1a] border border-white/10 rounded-xl text-white text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/10 focus:border-white/20 transition-all duration-200;
+  }
+
+  /* Textarea */
+  .textarea {
+    @apply w-full px-4 py-3 bg-[#1a1a1a] border border-white/10 rounded-xl text-white text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/10 focus:border-white/20 transition-all duration-200 resize-none;
+  }
+
+  /* Label */
+  .label {
+    @apply block text-sm font-medium text-gray-400 mb-2;
+  }
+
+  /* Section Title */
+  .section-title {
+    @apply text-lg font-medium text-white mb-4;
+  }
+
+  /* Badge Styles */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+  
+  .badge-success {
+    @apply badge bg-emerald-500/10 text-emerald-400 border border-emerald-500/20;
+  }
+  
+  .badge-warning {
+    @apply badge bg-amber-500/10 text-amber-400 border border-amber-500/20;
+  }
+  
+  .badge-error {
+    @apply badge bg-red-500/10 text-red-400 border border-red-500/20;
+  }
+  
+  .badge-info {
+    @apply badge bg-blue-500/10 text-blue-400 border border-blue-500/20;
+  }
+
+  /* Stat Card */
+  .stat-card {
+    @apply bg-[#141414] border border-white/5 rounded-xl p-5 hover:border-white/10 transition-colors;
+  }
+
+  /* Tool Card */
+  .tool-card {
+    @apply p-6 bg-[#141414] border border-white/5 rounded-xl hover:border-white/10 hover:bg-[#1a1a1a] transition-all duration-200 cursor-pointer;
+  }
+}
+
+/* Animation for the ping effect */
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-ping {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Smooth hover transitions */
+a, button {
+  transition-property: color, background-color, border-color, opacity, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Focus visible for accessibility */
+:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.2);
+  outline-offset: 2px;
+}
+
+/* Remove default focus outline */
+:focus:not(:focus-visible) {
+  outline: none;
+}
