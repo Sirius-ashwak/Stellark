@@ -65,7 +65,7 @@ app.listen(PORT, () => {
   console.log(`
   ╔═══════════════════════════════════════════════════════════╗
   ║                                                           ║
-  ║   🚀 Stellark API Server                                  ║
+  ║   Stellark API Server                                     ║
   ║                                                           ║
   ║   Running on: http://localhost:${PORT}                      ║
   ║   Environment: ${process.env.NODE_ENV || "development"}                         ║

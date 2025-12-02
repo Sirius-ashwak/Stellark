@@ -25,24 +25,25 @@ export function SubPageLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-[#0d0d0d] text-white">
-      {/* Navigation */}
-      <nav className="relative z-50 py-4 bg-[#0d0d0d]/80 backdrop-blur-md border-b border-white/5 sticky top-0">
+      {/* Navigation Bar */}
+      <nav className="z-50 py-4 bg-[#0d0d0d]/80 backdrop-blur-md border-b border-white/5 sticky top-0">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between items-center">
             <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-              <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+              <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2l2.4 4.8 5.3.8-3.8 3.7.9 5.2L12 14l-4.8 2.5.9-5.2-3.8-3.7 5.3-.8L12 2z" fill="currentColor"/>
+                <path d="M3 20Q8 17 12 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.6"/>
+                <path d="M5 22Q9 18 12 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.4"/>
               </svg>
               <span className="font-bold text-xl hidden sm:block">Stellark</span>
             </Link>
 
             <div className="hidden md:flex items-center gap-1 bg-[#1a1a1a] rounded-full px-2 py-1.5 border border-white/10">
-              <NavLink href="/" active={pathname === "/"}>Product</NavLink>
-              <NavLink href="/resources" active={isActive('/resources')}>Resources</NavLink>
-              <NavLink href="/enterprise" active={isActive('/enterprise')}>Enterprise</NavLink>
-              <NavLink href="/customers" active={isActive('/customers')}>Customers</NavLink>
-              <NavLink href="/pricing" active={isActive('/pricing')}>Pricing</NavLink>
+              <NavLink href="/#features" active={false}>Features</NavLink>
+              <NavLink href="/#how-it-works" active={false}>How It Works</NavLink>
               <NavLink href="/docs" active={isActive('/docs')}>Docs</NavLink>
+              <a href="https://github.com/Sirius-ashwak/Stellark" target="_blank" rel="noopener noreferrer" className="px-4 py-2 text-sm rounded-full transition-colors text-gray-400 hover:text-white hover:bg-white/5">GitHub</a>
+              <NavLink href="/pricing" active={isActive('/pricing')}>Pricing</NavLink>
             </div>
 
             <div className="flex items-center gap-3">
@@ -65,8 +66,10 @@ export function SubPageLayout({ children }: { children: React.ReactNode }) {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-2">
-              <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+              <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2l2.4 4.8 5.3.8-3.8 3.7.9 5.2L12 14l-4.8 2.5.9-5.2-3.8-3.7 5.3-.8L12 2z" fill="currentColor"/>
+                <path d="M3 20Q8 17 12 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.6"/>
+                <path d="M5 22Q9 18 12 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.4"/>
               </svg>
               <span className="font-semibold">Stellark</span>
             </div>

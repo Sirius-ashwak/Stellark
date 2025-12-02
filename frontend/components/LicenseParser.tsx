@@ -54,9 +54,9 @@ export function LicenseParser() {
   };
 
   const exampleLicenses = [
-    { name: "CC-BY 4.0", icon: "📝", text: "Creative Commons Attribution 4.0 International (CC-BY 4.0). You are free to share and adapt the material for any purpose, even commercially. You must give appropriate credit." },
-    { name: "CC-BY-NC-SA", icon: "🔒", text: "CC-BY-NC-SA 4.0. Attribution required. Non-commercial use only. Share alike - derivatives must use the same license." },
-    { name: "All Rights Reserved", icon: "⛔", text: "All Rights Reserved. No part of this work may be reproduced, distributed, or transmitted in any form without prior written permission." },
+    { name: "CC-BY 4.0", icon: "CC", text: "Creative Commons Attribution 4.0 International (CC-BY 4.0). You are free to share and adapt the material for any purpose, even commercially. You must give appropriate credit." },
+    { name: "CC-BY-NC-SA", icon: "NC", text: "CC-BY-NC-SA 4.0. Attribution required. Non-commercial use only. Share alike - derivatives must use the same license." },
+    { name: "All Rights Reserved", icon: "AR", text: "All Rights Reserved. No part of this work may be reproduced, distributed, or transmitted in any form without prior written permission." },
   ];
 
   return (
@@ -65,7 +65,7 @@ export function LicenseParser() {
         <div>
           <h2 className="section-title mb-1">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-500/10 flex items-center justify-center text-xl mr-3 border border-amber-500/20">
-              📜
+              <svg className="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
             </div>
             License Parser
           </h2>
@@ -210,8 +210,8 @@ export function LicenseParser() {
 
           {result.schema.royaltyRateBps > 0 && (
             <div className="p-4 bg-blue-500/5 border border-blue-500/20 rounded-xl mb-4 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400">
-                💰
+              <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 text-xs font-bold">
+                %
               </div>
               <div>
                 <span className="text-xs text-zinc-400 block">Royalty Rate</span>

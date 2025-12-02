@@ -196,10 +196,10 @@ export function UsageClassifier() {
             onChange={(e: ChangeEvent<HTMLSelectElement>) => setUseType(e.target.value as "commercial" | "non-commercial" | "derivative" | "educational")}
             className="input"
           >
-            <option value="commercial">💰 Commercial</option>
-            <option value="non-commercial">🎨 Non-Commercial</option>
-            <option value="derivative">🔄 Derivative Work</option>
-            <option value="educational">📚 Educational</option>
+            <option value="commercial">Commercial</option>
+            <option value="non-commercial">Non-Commercial</option>
+            <option value="derivative">Derivative Work</option>
+            <option value="educational">Educational</option>
           </select>
         </div>
       </div>

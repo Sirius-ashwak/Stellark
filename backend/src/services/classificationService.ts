@@ -86,39 +86,39 @@ export function getUsageRecommendations(schema: RightsSchema): string[] {
   const recommendations: string[] = [];
 
   if (schema.allowCommercialUse) {
-    recommendations.push("✓ Commercial use is permitted");
+    recommendations.push("[OK] Commercial use is permitted");
   } else {
-    recommendations.push("✗ Commercial use is NOT permitted");
+    recommendations.push("[NO] Commercial use is NOT permitted");
   }
 
   if (schema.allowDerivatives) {
-    recommendations.push("✓ Derivative works are permitted");
+    recommendations.push("[OK] Derivative works are permitted");
     if (schema.shareAlike) {
-      recommendations.push("  → Derivatives must use the same license (ShareAlike)");
+      recommendations.push("  -> Derivatives must use the same license (ShareAlike)");
     }
   } else {
-    recommendations.push("✗ Derivative works are NOT permitted");
+    recommendations.push("[NO] Derivative works are NOT permitted");
   }
 
   if (schema.attributionRequired) {
-    recommendations.push("⚠ Attribution is required");
+    recommendations.push("[!] Attribution is required");
   }
 
   if (schema.royaltyRateBps > 0) {
     const percentage = schema.royaltyRateBps / 100;
-    recommendations.push(`💰 Royalty payment required: ${percentage}%`);
+    recommendations.push(`Royalty payment required: ${percentage}%`);
   }
 
   if (schema.territory.length > 0 && !schema.territory.includes("worldwide")) {
-    recommendations.push(`🌍 Limited to territories: ${schema.territory.join(", ")}`);
+    recommendations.push(`Limited to territories: ${schema.territory.join(", ")}`);
   }
 
   if (schema.prohibitedUses.length > 0) {
-    recommendations.push(`🚫 Prohibited uses: ${schema.prohibitedUses.join(", ")}`);
+    recommendations.push(`Prohibited uses: ${schema.prohibitedUses.join(", ")}`);
   }
 
   if (schema.allowedPlatforms.length > 0) {
-    recommendations.push(`📱 Allowed platforms only: ${schema.allowedPlatforms.join(", ")}`);
+    recommendations.push(`Allowed platforms only: ${schema.allowedPlatforms.join(", ")}`);
   }
 
   return recommendations;

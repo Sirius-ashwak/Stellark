@@ -1,0 +1,37 @@
+services:
+  # Backend Service
+  - type: web
+    name: stellark-backend
+    env: node
+    rootCommand: cd backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20.11.0
+      - key: PORT
+        value: 10000
+      - key: WALLET_PRIVATE_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: PINATA_JWT
+        sync: false
+      - key: DATABASE_URL
+        value: file:./prod.db
+
+  # Frontend Service
+  - type: web
+    name: stellark-frontend
+    env: node
+    rootCommand: cd frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20.11.0
+      - key: BACKEND_URL
+        fromService:
+          type: web
+          name: stellark-backend
+          property: url

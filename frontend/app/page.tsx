@@ -103,45 +103,20 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between items-center">
             <Link href="/" className="flex items-center gap-2">
-              <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+              <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2l2.4 4.8 5.3.8-3.8 3.7.9 5.2L12 14l-4.8 2.5.9-5.2-3.8-3.7 5.3-.8L12 2z" fill="currentColor"/>
+                <path d="M3 20Q8 17 12 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.6"/>
+                <path d="M5 22Q9 18 12 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.4"/>
               </svg>
               <span className="font-semibold text-lg">Stellark</span>
             </Link>
             
             <div className="hidden md:flex items-center gap-1 bg-[#1a1a1a] rounded-full px-2 py-1.5 border border-white/10">
-              <div className="relative">
-                <button onClick={() => setActiveDropdown(activeDropdown === 'product' ? null : 'product')} className="px-4 py-2 text-sm rounded-full transition-colors bg-white/10 text-white flex items-center gap-1">
-                  Product <ChevronDownIcon />
-                </button>
-                {activeDropdown === 'product' && (
-                  <DropdownMenu>
-                    <DropdownSection title="PLATFORM OVERVIEW">
-                      <DropdownItem href="#features" icon={<DocumentIcon />} title="AI License Parser" badge="AI" description="Parse any license into structured rights." />
-                      <DropdownItem href="#features" icon={<ShieldIcon />} title="IP Registration" badge="ON-CHAIN" description="Register on Story Protocol." />
-                      <DropdownItem href="#features" icon={<SearchIcon />} title="Usage Classifier" badge="AI" description="Check usage compliance." />
-                      <DropdownItem href="#features" icon={<ChartIcon />} title="Rights Dashboard" badge="BETA" description="Track your IP portfolio." />
-                    </DropdownSection>
-                  </DropdownMenu>
-                )}
-              </div>
-              <div className="relative">
-                <button onClick={() => setActiveDropdown(activeDropdown === 'resources' ? null : 'resources')} className="px-4 py-2 text-sm rounded-full transition-colors text-gray-400 hover:text-white hover:bg-white/5 flex items-center gap-1">
-                  Resources <ChevronDownIcon />
-                </button>
-                {activeDropdown === 'resources' && (
-                  <DropdownMenu>
-                    <DropdownSection title="LEARN">
-                      <DropdownItem href="/docs" icon={<BookIcon />} title="Documentation" description="API reference and guides." />
-                      <DropdownItem href="/resources" icon={<PlayIcon />} title="Tutorials" description="Step-by-step guides." />
-                    </DropdownSection>
-                  </DropdownMenu>
-                )}
-              </div>
-              <Link href="/enterprise" className="px-4 py-2 text-sm rounded-full transition-colors text-gray-400 hover:text-white hover:bg-white/5">Enterprise</Link>
-              <Link href="/customers" className="px-4 py-2 text-sm rounded-full transition-colors text-gray-400 hover:text-white hover:bg-white/5">Customers</Link>
+              <Link href="#features" className="px-4 py-2 text-sm rounded-full transition-colors text-gray-400 hover:text-white hover:bg-white/5">Features</Link>
+              <Link href="#how-it-works" className="px-4 py-2 text-sm rounded-full transition-colors text-gray-400 hover:text-white hover:bg-white/5">How It Works</Link>
+              <Link href="/docs" className="px-4 py-2 text-sm rounded-full transition-colors text-gray-400 hover:text-white hover:bg-white/5">Docs</Link>
+              <a href="https://github.com/Sirius-ashwak/Stellark" target="_blank" rel="noopener noreferrer" className="px-4 py-2 text-sm rounded-full transition-colors text-gray-400 hover:text-white hover:bg-white/5">GitHub</a>
               <Link href="/pricing" className="px-4 py-2 text-sm rounded-full transition-colors text-gray-400 hover:text-white hover:bg-white/5">Pricing</Link>
-              <a href="https://docs.story.foundation" target="_blank" rel="noopener noreferrer" className="px-4 py-2 text-sm rounded-full transition-colors text-gray-400 hover:text-white hover:bg-white/5">Docs</a>
             </div>
 
             <div className="flex items-center gap-3">
@@ -205,7 +180,7 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section className="relative z-10 py-24 px-6 lg:px-8">
+      <section id="how-it-works" className="relative z-10 py-24 px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <span className="inline-block text-xs font-semibold tracking-widest text-gray-500 uppercase mb-4">HOW IT WORKS</span>
@@ -265,16 +240,18 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
             <div className="col-span-2">
               <Link href="/" className="flex items-center gap-2 mb-4">
-                <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2l2.4 4.8 5.3.8-3.8 3.7.9 5.2L12 14l-4.8 2.5.9-5.2-3.8-3.7 5.3-.8L12 2z" fill="currentColor"/>
+                  <path d="M3 20Q8 17 12 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.6"/>
+                  <path d="M5 22Q9 18 12 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.4"/>
                 </svg>
                 <span className="text-white font-medium">Stellark</span>
               </Link>
               <p className="text-sm text-gray-500 max-w-xs">On-chain IP rights management powered by AI and secured by Story Protocol.</p>
             </div>
-            <FooterColumn title="Product" links={[{ label: "Features", href: "#features" }, { label: "Pricing", href: "/pricing" }, { label: "Dashboard", href: "/dashboard" }, { label: "API", href: "/docs" }]} />
-            <FooterColumn title="Resources" links={[{ label: "Documentation", href: "/docs" }, { label: "Tutorials", href: "/resources" }, { label: "Blog", href: "/resources" }, { label: "Support", href: "/docs" }]} />
-            <FooterColumn title="Company" links={[{ label: "Customers", href: "/customers" }, { label: "Enterprise", href: "/enterprise" }, { label: "About", href: "/enterprise" }, { label: "Contact", href: "/enterprise" }]} />
+            <FooterColumn title="Product" links={[{ label: "Features", href: "#features" }, { label: "How It Works", href: "#how-it-works" }, { label: "Pricing", href: "/pricing" }, { label: "Dashboard", href: "/dashboard" }]} />
+            <FooterColumn title="Developers" links={[{ label: "Documentation", href: "/docs" }, { label: "API Reference", href: "/docs" }, { label: "GitHub", href: "https://github.com/Sirius-ashwak/Stellark" }, { label: "Story Protocol", href: "https://docs.story.foundation" }]} />
+            <FooterColumn title="Connect" links={[{ label: "Twitter", href: "https://twitter.com" }, { label: "Discord", href: "https://discord.com" }, { label: "GitHub", href: "https://github.com/Sirius-ashwak/Stellark" }]} />
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5">
             <p className="text-sm text-gray-600 mb-4 md:mb-0">© 2024 Stellark. Built on Story Protocol.</p>
