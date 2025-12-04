@@ -2,15 +2,15 @@ services:
   # Backend Service
   - type: web
     name: stellark-backend
-    env: node
-    rootCommand: cd backend
-    buildCommand: npm install && npm run build
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install && npx prisma generate && npm run build
     startCommand: npm start
     envVars:
       - key: NODE_VERSION
-        value: 20.11.0
+        value: "20"
       - key: PORT
-        value: 10000
+        value: "10000"
       - key: WALLET_PRIVATE_KEY
         sync: false
       - key: GROQ_API_KEY
@@ -23,15 +23,15 @@ services:
   # Frontend Service
   - type: web
     name: stellark-frontend
-    env: node
-    rootCommand: cd frontend
+    runtime: node
+    rootDir: frontend
     buildCommand: npm install && npm run build
     startCommand: npm start
     envVars:
       - key: NODE_VERSION
-        value: 20.11.0
+        value: "20"
       - key: BACKEND_URL
         fromService:
           type: web
           name: stellark-backend
-          property: url
+          property: host
