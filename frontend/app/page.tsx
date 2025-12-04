@@ -130,7 +130,7 @@ export default function Home() {
       {activeDropdown && <div className="fixed inset-0 z-40" onClick={() => setActiveDropdown(null)} />}
 
       {/* Hero */}
-      <section className="relative z-10 pt-32 pb-20 px-6 lg:px-8">
+      <section className="relative z-10 min-h-[calc(100vh-80px)] flex items-center justify-center py-16 px-6 lg:px-8">
         <div className="max-w-5xl mx-auto text-center">
           <Link href="https://aeneid.explorer.story.foundation" target="_blank" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1a1a1a] border border-white/10 hover:border-white/20 transition-colors mb-12 group">
             <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
