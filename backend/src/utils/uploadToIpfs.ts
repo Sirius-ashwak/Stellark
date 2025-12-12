@@ -18,7 +18,7 @@ function getPinataClient(): PinataSDK {
   return pinataClient;
 }
 
-export async function uploadJSONToIPFS(jsonMetadata: unknown): Promise<string> {
+export async function uploadJSONToIPFS(jsonMetadata: any): Promise<string> {
   const pinata = getPinataClient();
   const { IpfsHash } = await pinata.upload.json(jsonMetadata);
   return IpfsHash;
