@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import type { ReactNode } from "react";
 import { http, createConfig, WagmiProvider } from "wagmi";
 import { mainnet, sepolia } from "wagmi/chains";
@@ -25,20 +25,23 @@ const storyAeneid = {
   testnet: true,
 } as const;
 
-// Wagmi configuration - using only injected connector for simplicity
-const config = createConfig({
-  chains: [storyAeneid, sepolia, mainnet],
-  connectors: [
-    injected({
-      shimDisconnect: true,
-    }),
-  ],
-  transports: {
-    [storyAeneid.id]: http(),
-    [sepolia.id]: http(),
-    [mainnet.id]: http(),
-  },
-});
+// Create config function to ensure it's only created on the client
+function getConfig() {
+  return createConfig({
+    chains: [storyAeneid, sepolia, mainnet],
+    connectors: [
+      injected({
+        shimDisconnect: true,
+      }),
+    ],
+    transports: {
+      [storyAeneid.id]: http(),
+      [sepolia.id]: http(),
+      [mainnet.id]: http(),
+    },
+    ssr: true, // Enable SSR support
+  });
+}
 
 interface ProvidersProps {
   children: ReactNode;
@@ -46,11 +49,17 @@ interface ProvidersProps {
 
 export function Providers({ children }: ProvidersProps) {
   const [queryClient] = useState(() => new QueryClient());
+  const [config] = useState(() => getConfig());
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        {children}
+        {mounted ? children : null}
       </QueryClientProvider>
     </WagmiProvider>
   );
